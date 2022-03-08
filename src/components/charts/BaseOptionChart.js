@@ -80,19 +80,19 @@ export default function BaseOptionChart() {
   return {
     // Colors
     colors: [
-      theme.palette.primary.main,
-      theme.palette.chart.yellow[0],
-      theme.palette.chart.blue[0],
-      theme.palette.chart.violet[0],
       theme.palette.chart.green[0],
+      theme.palette.chart.yellow[0],
+      theme.palette.primary.main, 
+      theme.palette.chart.blue[0],
+      theme.palette.chart.violet[0], 
       theme.palette.chart.red[0]
     ],
 
     // Chart
     chart: {
-      toolbar: { show: false },
-      zoom: { enabled: false },
-      // animations: { enabled: false },
+      toolbar: { show: true },
+      zoom: { enabled: true },
+      animations: { enabled: true },
       foreColor: theme.palette.text.disabled,
       fontFamily: theme.typography.fontFamily
     },

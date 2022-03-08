@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react'; 
 import { alpha, styled } from '@mui/material/styles';
-import { Card, Typography } from '@mui/material';
-// utils
-//
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import Switch from '@mui/material/Switch';
-import Iconify from '../../components/Iconify';
+import { Card, Typography } from '@mui/material'; 
+import Switch from '@mui/material/Switch'; 
 import { useTheme, makeStyles } from '@mui/styles';
+
+import Iconify from '../../components/Iconify';
 
 const useStyles = makeStyles((theme) => ({
   root: (props) => ({
@@ -28,17 +25,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginBottom: theme.spacing(3),
     color: props.color,
-    backgroundImage: `linear-gradient(135deg, ${alpha(theme.palette.warning.dark, 0)} 0%, ${alpha(
-      theme.palette.warning.dark,
+    backgroundImage: `linear-gradient(135deg, ${alpha(props.color, 0)} 0%, ${alpha(
+      props.color,
       0.24
     )} 100%)`
   })
 }));
 
 const CardDevice = (props) => {
-
+  const { checked, onChange,title, icon } = props;
   const theme = useTheme();
-  const [checked, setChecked] = useState(false);
 
   const styles = {
     active: {
@@ -50,23 +46,19 @@ const CardDevice = (props) => {
       color: theme.palette.info.dark
     }
   };
-  const stylesColor = checked ? { ...styles.active } : { ...styles.disabled }; 
-
-  const handleChangeChecked = (event) => {
-    setChecked(event.target.checked);
-  };
+  const stylesColor = checked ? { ...styles.active } : { ...styles.disabled };
 
   const classes = useStyles({ ...props, ...stylesColor });
   return (
     <Card className={classes.root}>
       <div className={classes.iconDevice}>
-        <Iconify icon="carbon:light" width={24} height={24} />
+        <Iconify icon={icon||"carbon:light"} width={24} height={24} />
       </div>
       <Typography variant="h3">
-        <Switch checked={checked} onChange={handleChangeChecked} color="warning" />
+        <Switch checked={checked} onChange={onChange} color="warning" />
       </Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Light
+        {title||'Light'}
       </Typography>
     </Card>
   );

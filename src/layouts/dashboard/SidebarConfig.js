@@ -11,16 +11,16 @@ const sidebarConfig = [
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill')
   },
-  // {
-  //   title: 'user',
-  //   path: '/dashboard/user',
-  //   icon: getIcon('eva:people-fill')
-  // },
-  // {
-  //   title: 'product',
-  //   path: '/dashboard/products',
-  //   icon: getIcon('eva:shopping-bag-fill')
-  // },
+  {
+    title: 'device',
+    path: '/dashboard/products',
+    icon: getIcon('codicon:device-mobile')
+  },
+  {
+    title: 'user',
+    path: '/dashboard/user',
+    icon: getIcon('eva:people-fill')
+  }
   // {
   //   title: 'blog',
   //   path: '/dashboard/blog',
