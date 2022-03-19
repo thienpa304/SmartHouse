@@ -20,12 +20,12 @@ const sidebarConfig = [
     title: 'user',
     path: '/dashboard/user',
     icon: getIcon('eva:people-fill')
-  }
-  // {
-  //   title: 'blog',
-  //   path: '/dashboard/blog',
-  //   icon: getIcon('eva:file-text-fill')
-  // },
+  },
+  {
+    title: 'account',
+    path: '/dashboard/account',
+    icon: getIcon('eva:file-text-fill')
+  },
   // {
   //   title: 'login',
   //   path: '/login',

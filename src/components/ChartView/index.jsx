@@ -13,22 +13,20 @@ const CHART_DATA = [
     name: 'Team A',
     type: 'column',
     data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
-  },
-  {
-    name: 'Team B',
-    type: 'area',
-    data: [44, 55, 41, 34, 22, 43, 21, 41, 56, 27, 43]
-  },
-  {
-    name: 'Team C',
-    type: 'line',
-    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
   }
 ];
 
 const ChartView = (props) => {
   const theme = useTheme();
-  const { data, title, subheader, measure, labels, color, action } = props;
+  const { data, title, subheader, color, action } = props;
+  const labels = data.labels;
+  const dataChart = [{
+    data: data.data,
+    name: data.name,
+    type: data.type
+  }]
+  const unit = data.unit;
+
   const chartOptions = merge(BaseOptionChart(), {
     colors: [color || theme.palette.chart.red[0]],
     stroke: { width: [2] },
@@ -61,7 +59,7 @@ const ChartView = (props) => {
       y: {
         formatter: (y) => {
           if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} ${measure || 'NaN'}`;
+            return `${y.toFixed(0)} ${unit || 'NaN'}`;
           }
           return y;
         }
@@ -79,7 +77,7 @@ const ChartView = (props) => {
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart
           type="line"
-          series={data || CHART_DATA}
+          series={dataChart || CHART_DATA}
           options={chartOptions}
           height={364}
         />

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-
+import Socket from '../../Socket'
 import CardDevice from '../../components/CardDevice';
 
 const Device = (props) => {
@@ -8,11 +8,15 @@ const Device = (props) => {
   const [checkedLightOne, setCheckedLightOne] = useState(true);
   const [checkedDoor, setCheckedDoor] = useState(false);
   const [checkedPump, setCheckedPump] = useState(false);
-  // const [checkedTemperature, setCheckedTemperature] = useState(true);
-
+  // const [checkedTemperature, setCheckedTemperature] = useState(true); 
+  useEffect(() => {  
+    Socket.comsumer('helloThien/f/bbc-led',(data) => {
+      setCheckedLight(Boolean(Number(data)));
+    })  
+  }, []);
   const handleChangeCheckedLight = (event) => {
     setCheckedLight(event.target.checked);
-    // code
+    Socket.publish('helloThien/f/bbc-led',Number(event.target.checked).toString());
   };
   const handleChangeCheckedDoor = (event) => {
     setCheckedDoor(event.target.checked);

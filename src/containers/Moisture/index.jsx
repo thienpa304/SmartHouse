@@ -8,27 +8,53 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import SelectVariants from '../../components/SelectVariants';
 import ChartView from '../../components/ChartView';
 
+const dataTemplate = {
+  name: 'Moisture',
+  type: 'area',
+  unit: '%',
+  data: [
+    44, 55, 41, 167, 22, 43, 121, 41, 56, 27, 143, 124, 224, 44, 155, 41, 67, 122, 143, 21, 111, 56, 127,
+    43, 24, 24
+  ],
+  labels: [
+    '02:03:03',
+    '02:03:08',
+    '02:03:13',
+    '02:03:15',
+    '02:03:20',
+    '02:03:25',
+    '02:03:30',
+    '02:03:35',
+    '02:03:40',
+    '02:03:45',
+    '02:03:50',
+    '02:03:45',
+    '02:03:50',
+    '02:03:03',
+    '02:03:08',
+    '02:03:13',
+    '02:03:15',
+    '02:03:20',
+    '02:03:25',
+    '02:03:30',
+    '02:03:35',
+    '02:03:40',
+    '02:03:45',
+    '02:03:50',
+    '02:03:45',
+    '02:03:50'
+  ]
+};
 const Moisture  = (props) => {
   const theme = useTheme();
   const [selectDate, setSelectDate] = useState('2017-01-01');
   const [timeRange, setTimeRange] = useState(1);
-  const dataTemplate = [
-    {
-      name: 'Moisture',
-      type: 'area',
-      data: [44, 55, 431, 67, 355, 43, 21, 211, 56, 233, 43]
-    }
-  ];
+   
    
   const renderActions = (
     <div>
       <SelectVariants
-        value={timeRange}
-        defaultValues={[
-          { value: 1, name: ' 5 Seconds' },
-          { value: 2, name: ' 1 Minute' },
-          { value: 3, name: ' 1 Hour' }
-        ]}
+        value={timeRange} 
         label="Range"
         handleChange={(event) => {setTimeRange(event.target.value)}}
       />
@@ -53,12 +79,9 @@ const Moisture  = (props) => {
           data={dataTemplate}
           title="Moisture"
           subheader = "Range per 5 second (%)"
-          color={theme.palette.chart.violet[0]}
-          measure="%"
+          color={theme.palette.chart.violet[0]} 
         />
-      </Grid>
-
-      <Grid item xs={12} md={6} lg={4}></Grid>
+      </Grid> 
     </>
   );
 };

@@ -7,28 +7,54 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import SelectVariants from '../../components/SelectVariants';
 const Temperature = (props) => {
-  
   const [selectDate, setSelectDate] = useState('2017-01-01');
   const [timeRange, setTimeRange] = useState(1);
-  const dataTemplate = [
-    {
-      name: 'Temperature',
-      type: 'area',
-      data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-    }
-  ];
-   
+  const dataTemplate = {
+    name: 'Temperature',
+    type: 'area',
+    unit: '°C',
+    data: [
+      44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43, 24, 24, 44, 55, 41, 67, 22, 43, 21, 41, 56, 27,
+      43, 24, 24
+    ],
+    labels: [
+      '02:03:03',
+      '02:03:08',
+      '02:03:13',
+      '02:03:15',
+      '02:03:20',
+      '02:03:25',
+      '02:03:30',
+      '02:03:35',
+      '02:03:40',
+      '02:03:45',
+      '02:03:50',
+      '02:03:45',
+      '02:03:50',
+      '02:03:03',
+      '02:03:08',
+      '02:03:13',
+      '02:03:15',
+      '02:03:20',
+      '02:03:25',
+      '02:03:30',
+      '02:03:35',
+      '02:03:40',
+      '02:03:45',
+      '02:03:50',
+      '02:03:45',
+      '02:03:50'
+    ]
+  };
+
   const renderActions = (
     <div>
       <SelectVariants
         value={timeRange}
-        defaultValues={[
-          { value: 1, name: '5 Seconds' },
-          { value: 2, name: '1 Minute' },
-          { value: 3, name: '1 Hour' }
-        ]}
         label="Range"
-        handleChange={(event) => {setTimeRange(event.target.value)}}
+        handleChange={(event) => {
+          setTimeRange(event.target.value);
+        }}
       />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DesktopDatePicker
@@ -46,10 +72,8 @@ const Temperature = (props) => {
   return (
     <>
       <Grid item xs={12} md={12} lg={12}>
-        <ChartView action={renderActions} data={dataTemplate} measure="°C" />
-      </Grid>
-
-      <Grid item xs={12} md={6} lg={4}></Grid>
+        <ChartView action={renderActions} data={dataTemplate} />
+      </Grid> 
     </>
   );
 };

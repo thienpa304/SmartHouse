@@ -8,27 +8,52 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import SelectVariants from '../../components/SelectVariants';
 import ChartView from '../../components/ChartView';
-
+const dataTemplate = {
+  name: 'Concentration',
+  type: 'area',
+  unit: '%',
+  data: [
+    44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43, 24, 24, 44, 55, 41, 67, 22, 43, 21, 41, 56, 27,
+    43, 24, 24
+  ],
+  labels: [
+    '02:03:03',
+    '02:03:08',
+    '02:03:13',
+    '02:03:15',
+    '02:03:20',
+    '02:03:25',
+    '02:03:30',
+    '02:03:35',
+    '02:03:40',
+    '02:03:45',
+    '02:03:50',
+    '02:03:45',
+    '02:03:50',
+    '02:03:03',
+    '02:03:08',
+    '02:03:13',
+    '02:03:15',
+    '02:03:20',
+    '02:03:25',
+    '02:03:30',
+    '02:03:35',
+    '02:03:40',
+    '02:03:45',
+    '02:03:50',
+    '02:03:45',
+    '02:03:50'
+  ]
+};
 const Concentration = (props) => {
   const theme = useTheme();
   const [selectDate, setSelectDate] = useState('2017-01-01');
   const [timeRange, setTimeRange] = useState(1);
-  const dataTemplate = [
-    {
-      name: 'Concentration',
-      type: 'area',
-      data: [44, 55, 431, 67, 22, 43, 21, 41, 56, 27, 43]
-    }
-  ]; 
+   
   const renderActions = (
     <div>
       <SelectVariants
-        value={timeRange}
-        defaultValues={[
-          { value: 1, name: '5 Seconds' },
-          { value: 2, name: '1 Minute' },
-          { value: 3, name: '1 Hour' }
-        ]}
+        value={timeRange} 
         label="Range"
         handleChange={(event) => {setTimeRange(event.target.value)}}
       />
@@ -53,12 +78,9 @@ const Concentration = (props) => {
           data={dataTemplate}
           title="Concentration"
           subheader="Range per 5 second (%)"
-          color={theme.palette.chart.green[0]}
-          measure="%"
+          color={theme.palette.chart.green[0]} 
         />
-      </Grid>
-
-      <Grid item xs={12} md={6} lg={4}></Grid>
+      </Grid> 
     </>
   );
 };
