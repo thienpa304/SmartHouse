@@ -12,19 +12,23 @@ const CHART_DATA = [
   {
     name: 'Team A',
     type: 'column',
-    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
+    data: []
   }
 ];
 
 const ChartView = (props) => {
   const theme = useTheme();
   const { data, title, subheader, color, action } = props;
-  const labels = data.labels;
-  const dataChart = [{
-    data: data.data,
-    name: data.name,
-    type: data.type
-  }]
+
+  const labels = data.labels || [];
+
+  const dataChart = [
+    {
+      data: data.values || [],
+      name: data.name,
+      type: data.type
+    }
+  ];
   const unit = data.unit;
 
   const chartOptions = merge(BaseOptionChart(), {
@@ -32,19 +36,7 @@ const ChartView = (props) => {
     stroke: { width: [2] },
     plotOptions: {},
     fill: { type: ['gradient'] },
-    labels: labels || [
-      '02:03:03',
-      '02:03:08',
-      '02:03:13',
-      '02:03:15',
-      '02:03:20',
-      '02:03:25',
-      '02:03:30',
-      '02:03:35',
-      '02:03:40',
-      '02:03:45',
-      '02:03:50'
-    ],
+    labels: labels || [],
     xaxis: {
       type: 'category',
       labels: {
@@ -66,7 +58,6 @@ const ChartView = (props) => {
       }
     }
   });
-
   return (
     <Card>
       <CardHeader
