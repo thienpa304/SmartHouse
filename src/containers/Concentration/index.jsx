@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
@@ -8,54 +8,45 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import SelectVariants from '../../components/SelectVariants';
 import ChartView from '../../components/ChartView';
-const dataTemplate = {
-  name: 'Concentration',
-  type: 'area',
-  unit: '%',
-  data: [
-    44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43, 24, 24, 44, 55, 41, 67, 22, 43, 21, 41, 56, 27,
-    43, 24, 24
-  ],
-  labels: [
-    '02:03:03',
-    '02:03:08',
-    '02:03:13',
-    '02:03:15',
-    '02:03:20',
-    '02:03:25',
-    '02:03:30',
-    '02:03:35',
-    '02:03:40',
-    '02:03:45',
-    '02:03:50',
-    '02:03:45',
-    '02:03:50',
-    '02:03:03',
-    '02:03:08',
-    '02:03:13',
-    '02:03:15',
-    '02:03:20',
-    '02:03:25',
-    '02:03:30',
-    '02:03:35',
-    '02:03:40',
-    '02:03:45',
-    '02:03:50',
-    '02:03:45',
-    '02:03:50'
-  ]
-};
+
+import { keyId } from '../../constants';
+import { MesureApi } from '../../apis';
+
 const Concentration = (props) => {
   const theme = useTheme();
   const [selectDate, setSelectDate] = useState('2017-01-01');
-  const [timeRange, setTimeRange] = useState(1);
-   
+  const [timeRange, setTimeRange] = useState(5);
+  const [data, setData] = useState({
+    name: 'Concentration',
+    type: 'area',
+    unit: '%',
+    data: [],
+    labels: []
+  });
+  useEffect(() => { 
+    MesureApi.findByKey(
+      'key',
+      {
+        keyId: keyId.gas,
+        filter: timeRange,
+        sort: 'updated_at',
+        offset: 0,
+        limit: 20
+      },
+      (res) => {
+        setData((state) => ({ ...state, ...res }));
+      }
+    );
+  }, [timeRange]);
+  
   const renderActions = (
     <div>
       <SelectVariants
-        value={timeRange} 
+        value={timeRange}
         label="Range"
-        handleChange={(event) => {setTimeRange(event.target.value)}}
+        handleChange={(event) => {
+          setTimeRange(event.target.value);
+        }}
       />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DesktopDatePicker
@@ -75,12 +66,12 @@ const Concentration = (props) => {
       <Grid item xs={12} md={12} lg={12}>
         <ChartView
           action={renderActions}
-          data={dataTemplate}
+          data={data}
           title="Concentration"
           subheader="Range per 5 second (%)"
-          color={theme.palette.chart.green[0]} 
+          color={theme.palette.chart.green[0]}
         />
-      </Grid> 
+      </Grid>
     </>
   );
 };

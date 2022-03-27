@@ -1,18 +1,19 @@
-import Https from './https';
-import { format } from 'date-fns';
+import Https from './https'; 
+import { fTimeRange } from '../utils/formatTime.js';
 class MesureApi extends Https {
   constructor() {
     super('mesures');
   }
-  findByKey(key, params, callback) {
+  findByKey(key, params, callback) { 
+    
     this.findById(key, params)
       .then((res) => {
-        const result = {labels: [], values: []};
-        res.map((el) => {
-          result.values.push(el.value)
-          result.labels.push(format(new Date(el.updated_at), 'hh:mm:ss'))
+        const result = { labels: [], values: [] };
+        res.forEach((el) => {
+          result.values.push(Math.round(el.value));
+          result.labels.push(fTimeRange(el.updated_at, params.filter));
         });
-        return result
+        return result;
       })
       .then((res) => {
         callback(res);

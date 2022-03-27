@@ -7,10 +7,11 @@ import Select from '@mui/material/Select';
 export default function SelectVariants(props) {
   const { value, label, handleChange } = props;
   const defaultValues = [
-    { value: 1, name: '5 Seconds' },
-    { value: 2, name: '1 Minute' },
-    { value: 3, name: '1 Hour' }
-  ]
+    { value: 5, name: '5 Seconds' },
+    { value: 60, name: '1 Minute' },
+    { value: 3600, name: '1 Hour' },
+    { value: 3600 * 24, name: '1 Day' }
+  ];
   return (
     <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
       <InputLabel id="demo-simple-select-standard-label">{label}</InputLabel>

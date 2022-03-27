@@ -4,7 +4,7 @@ import axios from 'axios';
 const getAccessToken = () => {
   return window.localStorage ? window.localStorage.getItem('access_token') : null;
 };
-const baseURL = 'http://localhost:2001/'; 
+const baseURL = process.env.REACT_APP_SERVER_URL; 
 const axiosClient = axios.create({
   baseURL: baseURL,
   timeout: 30000,
@@ -18,7 +18,7 @@ axiosClient.interceptors.request.use(
   request => {
     //console.log('axios.interceptors____request____', request)
     request.headers = {
-      Authorization: getAccessToken()
+      Authorization:`Bearer ${getAccessToken()}`
     };
     return request;
   },
@@ -37,13 +37,13 @@ axiosClient.interceptors.response.use(
     if (res) {
       switch (res.status) {
         case 401:
-          console.error('UNAUTHORIZED', res);
-          window.location.href = "/sign-in";
+          console.error('UNAUTHORIZED', res); 
+          window.location.href = "/login";
           break;
         case 403:
           console.error('ACCESSDENIED', res);
           debugger;
-          window.location.href = "/access-denied";
+          window.location.href = "/404";
           break;
         default:
           break;

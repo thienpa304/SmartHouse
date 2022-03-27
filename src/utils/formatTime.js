@@ -19,3 +19,10 @@ export function fToNow(date) {
     addSuffix: true
   });
 }
+
+export function fTimeRange(date, range) {
+  let fString = 'hh:mm:ss'; 
+  if (60 * 60 * 2 > range && range > 45) fString = 'hh:mm';
+  else if (range > 60 * 12 * 2) fString = 'dd/MM';
+  return format(new Date(date), fString);
+}

@@ -13,6 +13,8 @@ import {
   FormControlLabel
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+
+import { AuthApi } from 'apis';
 // component
 import Iconify from '../../../components/Iconify';
 
@@ -34,8 +36,11 @@ export default function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (values) => {
+       
+      AuthApi.login(values).then((res) => {
+        navigate('/dashboard/app', { replace: true });
+      });
     }
   });
 

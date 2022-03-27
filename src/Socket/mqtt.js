@@ -2,7 +2,7 @@ import mqtt from 'mqtt/dist/mqtt';
 
 const options = {
   username: 'hoductri',
-  password: 'aio_ZhpF70RDQSfcNlPKTdP5jT70ejjp',
+  password: 'aio_EUQX952NvvPAbPKxVayxoNh6TSDY',
   port: '443'
 };
 

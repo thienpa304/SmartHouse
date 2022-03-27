@@ -20,8 +20,6 @@ const ChartView = (props) => {
   const theme = useTheme();
   const { data, title, subheader, color, action } = props;
 
-  const labels = data.labels || [];
-
   const dataChart = [
     {
       data: data.values || [],
@@ -29,14 +27,13 @@ const ChartView = (props) => {
       type: data.type
     }
   ];
-  const unit = data.unit;
 
   const chartOptions = merge(BaseOptionChart(), {
     colors: [color || theme.palette.chart.red[0]],
     stroke: { width: [2] },
     plotOptions: {},
     fill: { type: ['gradient'] },
-    labels: labels || [],
+    labels: data.labels || [],
     xaxis: {
       type: 'category',
       labels: {
@@ -51,7 +48,7 @@ const ChartView = (props) => {
       y: {
         formatter: (y) => {
           if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} ${unit || 'NaN'}`;
+            return `${y.toFixed(0)} ${data.unit || 'NaN'}`;
           }
           return y;
         }

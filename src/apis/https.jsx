@@ -3,6 +3,7 @@ import axios from './Axios';
 class Http {
 
   baseUri = null;
+  subUri = null;
 
   http = axios();
 
@@ -14,9 +15,11 @@ class Http {
   setBaseUri = baseUri => {
     this.baseUri = baseUri;
   };
-
-  find = async (params, query = {}) => {
-    return await this.http.get(`/${this.baseUri}`, params, query);
+  setSubUri = subUri => {
+    this.subUri = subUri;
+  };
+  find = async (params) => {
+    return await this.http.get(`/${this.baseUri||''}`, params);
   };
 
    
@@ -29,7 +32,7 @@ class Http {
   };
 
   create = async data => {
-    return await this.http.post(`/${this.baseUri}`);
+    return await this.http.post(`/${this.baseUri}/${this.subUri||''}`,data);
   };
 
   update = async (id, data) => {

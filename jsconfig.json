@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
-    "baseUrl": "."
+    "jsx": "preserve", 
+    "baseUrl": "src",
+    "paths": {
+      "apis/*": ["./src/apis/*"]
+    }
   },
   "include": [
     "src/**/*"

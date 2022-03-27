@@ -6,44 +6,44 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import SelectVariants from '../../components/SelectVariants';
-
+import { keyId } from '../../constants'
 import { MesureApi } from '../../apis';
 
 const Temperature = (props) => {
   const [selectDate, setSelectDate] = useState('2017-01-01');
-  const [timeRange, setTimeRange] = useState(1);
+  const [timeRange, setTimeRange] = useState(60);
   const [data, setData] = useState({
     name: 'Temperature',
     type: 'area',
     unit: '°C',
     data: [],
     labels: []
-  }); 
-  
+  });
 
-  useEffect(() => {
+  useEffect(() => { 
     MesureApi.findByKey(
       'key',
       {
-        keyId: 'hoductri/feeds/bbc-temp',
-        filter: 5,
+        keyId: keyId.temperature,
+        filter: timeRange,
         sort: 'updated_at',
         offset: 0,
         limit: 20
       },
       (res) => {
-        setData(state=>({...state,...res}));
+        setData((state) => ({ ...state, ...res }));
+        const time =1000 * timeRange
         setInterval(() => {
-          const newData = {...res};
+          const newData = { ...res };
           newData.values.push(newData.values[0]);
           newData.values.shift();
           newData.labels.push(newData.labels[0]);
           newData.labels.shift();
-          setData(state=>({ ...state,...newData }));
-        }, 2000);
+          setData((state) => ({ ...state, ...newData }));
+        }, time);
       }
     );
-  }, []);
+  }, [timeRange]);
   const renderActions = (
     <div>
       <SelectVariants
@@ -69,10 +69,7 @@ const Temperature = (props) => {
   return (
     <>
       <Grid item xs={12} md={12} lg={12}>
-        <ChartView
-          action={renderActions}
-          data={data}
-        />
+        <ChartView action={renderActions} data={data} />
       </Grid>
     </>
   );

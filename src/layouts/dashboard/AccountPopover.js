@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
 import { alpha } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
@@ -34,6 +34,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setOpen(true);
@@ -41,6 +42,11 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleLogout = ()=>{
+    localStorage.removeItem('access_token');
+    navigate('/login', { replace: true });
+  }
 
   return (
     <>
@@ -106,7 +112,7 @@ export default function AccountPopover() {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button fullWidth color="inherit" variant="outlined" onClick={handleLogout}>
             Logout
           </Button>
         </Box>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import Socket from '../../Socket'
 import CardDevice from '../../components/CardDevice';
-
+import { keyId } from '../../constants'
 const Device = (props) => {
   const [checkedLight, setCheckedLight] = useState(true);
   const [checkedLightOne, setCheckedLightOne] = useState(true);
@@ -10,25 +10,37 @@ const Device = (props) => {
   const [checkedPump, setCheckedPump] = useState(false);
   // const [checkedTemperature, setCheckedTemperature] = useState(true); 
   useEffect(() => {  
-    Socket.comsumer('helloThien/f/bbc-led',(data) => {
+
+    Socket.comsumer(keyId.firstLed,(data) => {
       setCheckedLight(Boolean(Number(data)));
     })  
+    Socket.comsumer(keyId.secondLed,(data) => {
+      setCheckedLightOne(Boolean(Number(data)));
+    })
+    Socket.comsumer(keyId.pump,(data) => {
+      setCheckedPump(Boolean(Number(data)));
+    })
+    Socket.comsumer(keyId.door,(data) => {
+      setCheckedDoor(Boolean(Number(data)));
+    })
+
   }, []);
+
   const handleChangeCheckedLight = (event) => {
     setCheckedLight(event.target.checked);
-    Socket.publish('helloThien/f/bbc-led',Number(event.target.checked).toString());
+    Socket.publish(keyId.firstLed,Number(event.target.checked).toString());
   };
   const handleChangeCheckedDoor = (event) => {
     setCheckedDoor(event.target.checked);
-    // code
+    Socket.publish(keyId.door,Number(event.target.checked).toString());
   };
   const handleChangeCheckedPump = (event) => {
     setCheckedPump(event.target.checked);
-    // code
+    Socket.publish(keyId.pump,Number(event.target.checked).toString());
   };
   const handleChangeCheckedLightOne = (event) => {
     setCheckedLightOne(event.target.checked);
-    // code
+    Socket.publish(keyId.secondLed,Number(event.target.checked).toString());
   };
   // const handleChangeCheckedTemperature = (event) => {
   //   setCheckedTemperature(event.target.checked);
