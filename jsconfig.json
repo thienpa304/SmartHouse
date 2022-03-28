@@ -4,7 +4,13 @@
     "jsx": "preserve", 
     "baseUrl": "src",
     "paths": {
-      "apis/*": ["./src/apis/*"]
+      "apis/*": ["./src/apis/*"],
+      "constants/*": ["./src/constants/*"],
+      "utils/*": ["./src/utils/*"],
+      "components/*": ["./src/components/*"],
+      "containers/*": ["./src/containers/*"],
+      "Socket/*": ["./src/socket/*"],
+      "sections/*": ["./src/sections/*"]
     }
   },
   "include": [

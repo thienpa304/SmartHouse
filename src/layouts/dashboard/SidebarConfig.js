@@ -25,7 +25,7 @@ const sidebarConfig = [
     title: 'account',
     path: '/dashboard/account',
     icon: getIcon('eva:file-text-fill')
-  },
+  }
   // {
   //   title: 'login',
   //   path: '/login',
