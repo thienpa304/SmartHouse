@@ -1,9 +1,9 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { alpha, styled } from '@mui/material/styles';
-import { Card, Typography } from '@mui/material'; 
-import Switch from '@mui/material/Switch'; 
+import { Card, Typography } from '@mui/material';
+import Switch from '@mui/material/Switch';
 import { useTheme, makeStyles } from '@mui/styles';
-
+import { useNavigate } from 'react-router-dom';
 import Iconify from '../../components/Iconify';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.1rem',
     alignItems: 'center',
     width: theme.spacing(8),
+    cursor: 'pointer',
     height: theme.spacing(8),
     justifyContent: 'center',
     marginBottom: theme.spacing(3),
@@ -33,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CardDevice = (props) => {
-  const { checked, onChange,title, icon } = props;
+  const { checked, onChange, title, icon, linkTo } = props;
   const theme = useTheme();
-
+  const history = useNavigate();
   const styles = {
     active: {
       background: theme.palette.warning.lighter,
@@ -49,16 +50,20 @@ const CardDevice = (props) => {
   const stylesColor = checked ? { ...styles.active } : { ...styles.disabled };
 
   const classes = useStyles({ ...props, ...stylesColor });
+
+  const handleLinkTo = (event) => {
+    history(`/dashboard/app/${linkTo}`);
+  };
   return (
     <Card className={classes.root}>
-      <div className={classes.iconDevice}>
-        <Iconify icon={icon||"carbon:light"} width={24} height={24} />
+      <div className={classes.iconDevice} onClick={handleLinkTo}>
+        <Iconify icon={icon || 'carbon:light'} width={24} height={24} />
       </div>
       <Typography variant="h3">
         <Switch checked={checked} onChange={onChange} color="warning" />
       </Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        {title||'Light'}
+        {title || 'Light'}
       </Typography>
     </Card>
   );

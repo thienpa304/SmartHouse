@@ -16,26 +16,35 @@ export const feeds = {
   door: 'bbc-door',
   pump: 'bbc-pump'
 };
+export const NAME_DEVICES = {
+  firstLed: 'Light 1',
+  temperature: 'Temperature',
+  moisture: 'Moisture',
+  gas: 'Gas',
+  secondLed: 'Light 2',
+  door: 'Door ',
+  pump: 'Pump'
+};
 
 export const keyId = convertToFeedKey(feeds,configMqtt.username)
 
-export const optionsRepeatSchedule = [
-  { label: 'One times', value:'1'},
+export const OPTIONS_REPEATS_CHEDULE = [ 
   { label: 'Every Days', value:'0'},
-  { label: 'Monday', value:'2'},
-  { label: 'Tuesday', value:'3'},
-  { label: 'Wednesday', value:'4'},
-  { label: 'Thursday', value:'5'},
-  { label: 'Friday', value:'6'},
-  { label: 'Saturday', value:'7'},
-  { label: 'Sunday', value:'8'}
+  { label: 'Monday', value:'1'},
+  { label: 'Tuesday', value:'2'},
+  { label: 'Wednesday', value:'3'},
+  { label: 'Thursday', value:'4'},
+  { label: 'Friday', value:'5'},
+  { label: 'Saturday', value:'6'},
+  { label: 'Sunday', value:'7'}
 ]
 
 export const TABLE_HEAD_SCHEDULES = [
   { id: 'time', label: 'Time', alignRight: false },
   { id: 'repeat', label: 'Repeat', alignRight: false },
-  { id: 'rest', label: 'Rest', alignRight: false },
+  { id: 'updated', label: 'Updated At', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
   { id: 'active', label: 'Active', alignRight: false },
   { id: '' }
 ];
+

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import Socket from '../../Socket'
-import CardDevice from '../../components/CardDevice';
-import { keyId } from '../../constants'
+import CardDevice from 'components/CardDevice';
+import { keyId } from 'constants'
 const Device = (props) => {
   const [checkedLight, setCheckedLight] = useState(true);
   const [checkedLightOne, setCheckedLightOne] = useState(true);
@@ -52,6 +52,7 @@ const Device = (props) => {
         <CardDevice
           title="Light 1"
           icon="carbon:light"
+          linkTo = {keyId.firstLed.split('/').join('_')}
           checked={checkedLight}
           onChange={handleChangeCheckedLight}
         />
@@ -60,6 +61,7 @@ const Device = (props) => {
         <CardDevice
           title="Door"
           icon="bi:door-open"
+          linkTo = {keyId.door.split('/').join('_')}
           checked={checkedDoor}
           onChange={handleChangeCheckedDoor}
         />
@@ -68,6 +70,7 @@ const Device = (props) => {
         <CardDevice
           title="Pump"
           icon="mdi:water-pump"
+          linkTo = {keyId.pump.split('/').join('_')}
           checked={checkedPump}
           onChange={handleChangeCheckedPump}
         />
@@ -76,6 +79,7 @@ const Device = (props) => {
         <CardDevice
           title="Light 2 "
           icon="carbon:light"
+          linkTo = {keyId.secondLed.split('/').join('_')}
           checked={checkedLightOne}
           onChange={handleChangeCheckedLightOne}
         />

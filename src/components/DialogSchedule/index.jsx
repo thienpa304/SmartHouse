@@ -1,35 +1,37 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DialogTitle from '@mui/material/DialogTitle';
-import TimePicker from '@mui/lab/TimePicker';
+import React, { useState } from 'react';
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Stack,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  DialogTitle
+} from '@mui/material';
 
-import { optionsRepeatSchedule } from 'constants';
+import { LocalizationProvider, TimePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
+import ScheduleApi from 'apis/ScheduleApi';
+import { OPTIONS_REPEATS_CHEDULE } from 'constants';
+import { fTimeRange } from 'utils/formatTime';
 
 export default function DialogSchedule(props) {
-  const { open, setOpen } = props;
-  const [timePicker, setTimePicker] = React.useState(new Date());
-  const [status, setStatus] = React.useState(true);
-  const [repeat, setRepeat] = React.useState(['1']);
+  const { open, setOpen, id, setTotal, itemEdit } = props;
+  const [timePicker, setTimePicker] = useState(new Date());
+  const [status, setStatus] = useState(true);
+  const [repeat, setRepeat] = useState(['0']); 
 
   const handleChangeRepeat = (event) => {
     const values = [...event.target.value];
     const newValue = values.pop();
-
-    if (newValue === '1') setRepeat(['1']);
-    else if (newValue === '0') setRepeat(['0']);
+    if (newValue === '0') setRepeat(['0']);
     else {
-      setRepeat(event.target.value.filter((value) => value !== '0' && value !== '1'));
+      setRepeat(event.target.value.filter((value) => value !== '0'));
     }
   };
   const handleChangeStatus = (event) => {
@@ -41,6 +43,22 @@ export default function DialogSchedule(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCreate = async (e) => {
+    const data = {
+      key_id: id.split('_').join('/'),
+      start_time: fTimeRange(timePicker, 60),
+      repeat: `${repeat}`,
+      active: true,
+      status
+    }
+    if(itemEdit) data._id = itemEdit
+    await ScheduleApi.create(data).then(() => {
+      setOpen(false);
+      setRepeat(['0']);
+      setTotal(pre=>pre+1)
+    });
   };
 
   return (
@@ -83,7 +101,7 @@ export default function DialogSchedule(props) {
                 fullWidth
                 multiple
               >
-                {optionsRepeatSchedule.map(({ value, label }) => (
+                {OPTIONS_REPEATS_CHEDULE.map(({ value, label }) => (
                   <MenuItem key={value} value={value}>
                     {label}
                   </MenuItem>
@@ -94,7 +112,7 @@ export default function DialogSchedule(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>{itemEdit?'Update':'Create'}</Button>
         </DialogActions>
       </Dialog>
     </div>

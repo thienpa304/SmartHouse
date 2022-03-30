@@ -28,7 +28,7 @@ class Http {
   };
 
   deleteById = async id => {
-    return await this.http.delete(`/${this.baseUri}`);
+    return await this.http.delete(`/${this.baseUri}/${id}`);
   };
 
   create = async data => {

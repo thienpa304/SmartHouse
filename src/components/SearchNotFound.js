@@ -15,8 +15,8 @@ export default function SearchNotFound({ searchQuery = '', ...other }) {
         Not found
       </Typography>
       <Typography variant="body2" align="center">
-        No results found for &nbsp;
-        <strong>&quot;{searchQuery}&quot;</strong>. Try checking for typos or using complete words.
+        No schedule found for &nbsp;
+        <strong>&quot;{searchQuery}&quot;</strong>. Please add new shedule to your device.
       </Typography>
     </Paper>
   );
