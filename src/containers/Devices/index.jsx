@@ -1,97 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Grid } from '@mui/material';
+import { Grid } from '@mui/material'
+import CardDevice from 'components/CardDevice'
+import { DEVICES, URL_API_ADAFRUIT } from 'constants'
+import React, { useEffect, useState } from 'react'
+import { formatkey } from 'utils'
 import Socket from '../../Socket'
-import CardDevice from 'components/CardDevice';
-import { keyId } from 'constants'
+
 const Device = (props) => {
-  const [checkedLight, setCheckedLight] = useState(true);
-  const [checkedLightOne, setCheckedLightOne] = useState(true);
-  const [checkedDoor, setCheckedDoor] = useState(false);
-  const [checkedPump, setCheckedPump] = useState(false);
-  // const [checkedTemperature, setCheckedTemperature] = useState(true); 
-  useEffect(() => {  
-
-    Socket.comsumer(keyId.firstLed,(data) => {
-      setCheckedLight(Boolean(Number(data)));
-    })  
-    Socket.comsumer(keyId.secondLed,(data) => {
-      setCheckedLightOne(Boolean(Number(data)));
-    })
-    Socket.comsumer(keyId.pump,(data) => {
-      setCheckedPump(Boolean(Number(data)));
-    })
-    Socket.comsumer(keyId.door,(data) => {
-      setCheckedDoor(Boolean(Number(data)));
-    })
-
+  const [listDevices, setListDevices] = useState([]);
+  useEffect(() => {
+    DEVICES.filter((item) => item.type === 'button').forEach(async ({ key, name, icon, index }) => {
+      const res = await fetch(`${URL_API_ADAFRUIT}${formatkey(key)}`);
+      let data = await res.json();
+      setListDevices((listDevices) => [
+        ...listDevices,
+        {
+          value: !Boolean(Number(data.last_value) % 2),
+          key: formatkey(key),
+          name: name,
+          index,
+          icon
+        }
+      ]);
+      Socket.comsumer(formatkey(key), (data) => {
+        setListDevices((preValue) =>
+          [...preValue].map((el) => {
+            if (el.key === formatkey(key)) el.value = !Boolean(Number(data) % 2);
+            return el;
+          })
+        );
+      });
+    });
   }, []);
-
-  const handleChangeCheckedLight = (event) => {
-    setCheckedLight(event.target.checked);
-    Socket.publish(keyId.firstLed,Number(event.target.checked).toString());
+  const handleChangeListDevice = (key, index) => (event) => {
+    Socket.publish(key, (Number(!event.target.checked) + index * 2).toString());
   };
-  const handleChangeCheckedDoor = (event) => {
-    setCheckedDoor(event.target.checked);
-    Socket.publish(keyId.door,Number(event.target.checked).toString());
-  };
-  const handleChangeCheckedPump = (event) => {
-    setCheckedPump(event.target.checked);
-    Socket.publish(keyId.pump,Number(event.target.checked).toString());
-  };
-  const handleChangeCheckedLightOne = (event) => {
-    setCheckedLightOne(event.target.checked);
-    Socket.publish(keyId.secondLed,Number(event.target.checked).toString());
-  };
-  // const handleChangeCheckedTemperature = (event) => {
-  //   setCheckedTemperature(event.target.checked);
-  //   // code
-  // };
   return (
     <>
-      <Grid item xs={12} sm={6} md={3}>
-        <CardDevice
-          title="Light 1"
-          icon="carbon:light"
-          linkTo = {keyId.firstLed.split('/').join('_')}
-          checked={checkedLight}
-          onChange={handleChangeCheckedLight}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
-        <CardDevice
-          title="Door"
-          icon="bi:door-open"
-          linkTo = {keyId.door.split('/').join('_')}
-          checked={checkedDoor}
-          onChange={handleChangeCheckedDoor}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
-        <CardDevice
-          title="Pump"
-          icon="mdi:water-pump"
-          linkTo = {keyId.pump.split('/').join('_')}
-          checked={checkedPump}
-          onChange={handleChangeCheckedPump}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
-        <CardDevice
-          title="Light 2 "
-          icon="carbon:light"
-          linkTo = {keyId.secondLed.split('/').join('_')}
-          checked={checkedLightOne}
-          onChange={handleChangeCheckedLightOne}
-        />
-      </Grid>
-      {/* <Grid item xs={12} sm={6} md={3}>
-        <CardDevice
-          title="Temperature"
-          icon="la:temperature-low"
-          checked={checkedTemperature}
-          onChange={handleChangeCheckedTemperature}
-        />
-      </Grid> */}
+      {listDevices.map((device) => (
+        <Grid key={device.key} item xs={12} sm={6} md={3}>
+          <CardDevice
+            title={device.name}
+            icon={device.icon}
+            linkTo={device.key.split('/').join('_')}
+            checked={device.value}
+            onChange={handleChangeListDevice(device.key, device.index)}
+          />
+        </Grid>
+      ))}
     </>
   );
 };

@@ -1,13 +1,9 @@
-import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Box, Card, Link, Typography, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
-// utils
-import { fCurrency } from '../../../utils/formatNumber';
-//
-import Label from '../../../components/Label';
-import ColorPreview from '../../../components/ColorPreview';
+import { Box, Card, Link, Stack, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
+import ColorPreview from '../../../components/ColorPreview'
 
 // ----------------------------------------------------------------------
 
@@ -26,12 +22,12 @@ ShopProductCard.propTypes = {
 };
 
 export default function ShopProductCard({ product }) {
-  const { name, cover, price, colors, status, priceSale } = product;
+  const { name, cover, colors } = product;
 
   return (
     <Card>
       <Box sx={{ pt: '100%', position: 'relative' }}>
-        {status && (
+        {/* {status && (
           <Label
             variant="filled"
             color={(status === 'sale' && 'error') || 'info'}
@@ -45,7 +41,7 @@ export default function ShopProductCard({ product }) {
           >
             {status}
           </Label>
-        )}
+        )} */}
         <ProductImgStyle alt={name} src={cover} />
       </Box>
 
@@ -58,7 +54,7 @@ export default function ShopProductCard({ product }) {
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <ColorPreview colors={colors} />
-          <Typography variant="subtitle1">
+          {/* <Typography variant="subtitle1">
             <Typography
               component="span"
               variant="body1"
@@ -71,7 +67,7 @@ export default function ShopProductCard({ product }) {
             </Typography>
             &nbsp;
             {fCurrency(price)}
-          </Typography>
+          </Typography> */}
         </Stack>
       </Stack>
     </Card>

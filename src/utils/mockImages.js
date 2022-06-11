@@ -1,13 +1,14 @@
 // ----------------------------------------------------------------------
 
 const productsLink = [
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/Packages/66525_Amazon_categorytile_ClimateControl_400x400_superside_EN_1.png',
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/Packages/LG_Feb_2022/LG_EN_400x400.jpg',
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/Packages/Schlage-Q4-2020/XCM_Manual_1282973_us_homeimprovement_cat_tileupdate_400x400_us.en_a576c25a-756c-47a3-9fac-7d9e4d979ebc.jpg',
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/Packages/SYLVANIA_Feb_2022/Sylvania_EN_400x400.jpg',
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/Packages/Shark-Q3-2021/Shark_categorytile_VacuumsAndMops_400x400_superside_EN_1.jpg',
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/Packages/Moen-Q42021/OTHER_SOLUTIONS_400x400_EN_2.jpg',
-  'https://images-na.ssl-images-amazon.com/images/G/01/SmartHome/StorefrontRefresh/Round-2/XCM_Manual_1263220_us_homeimprov_smarthome_storefront_400x400-4_43efe889-946f-4094-a3e1-f16847f6d4c4.jpg'
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9o3VQ0jqok0ZBRdeyNv-9BFxeJHoGzCIxEQ&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9o3VQ0jqok0ZBRdeyNv-9BFxeJHoGzCIxEQ&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh35ts0VAy0CrQnEjrVm3EhHrG7K_XAWppjg&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCqRmBi7jMBySdb-8DfY9P9visMWA59sf8cA&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz22MGFt8LyWexAhZ8LjnUZGMUTfH5mARlUQ&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4gNTJZfWUJyCKNG1saFJK1ct5URkVChzWbg&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlRSL2YtcUG2L4cH1nRdKg11y2t1owXaE31A&usqp=CAU',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0cswhyOJFRCNp94xk4m9yYCa8nngZbZl0YA&usqp=CAU'
 ]
 export const mockImgCover = (index) => `/static/mock-images/covers/cover_${index}.jpg`;
 export const mockImgProduct = (index) => productsLink[index];

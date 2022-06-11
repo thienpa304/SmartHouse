@@ -1,11 +1,11 @@
 // material
-import { Box, Grid, Container, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material'
+import { DEVICES } from 'constants'
+import BlockCharts from 'containers/BlockCharts'
 // components
-import Page from '../components/Page';
-import Device from '../containers/Devices';
-import Temperature from '../containers/Temperature';
-import Concentration from '../containers/Concentration';
-import Moisture from '../containers/Moisture'
+import Page from '../components/Page'
+import Device from '../containers/Devices'
+
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
@@ -17,9 +17,9 @@ export default function DashboardApp() {
         </Box>
         <Grid container spacing={3}>
           <Device />
-          <Temperature />
-          <Concentration />
-          <Moisture/>
+          {DEVICES.filter((item) => item.type === 'chart').map((item) => (
+            <BlockCharts item={item} key={item.key} />
+          ))}
         </Grid>
       </Container>
     </Page>

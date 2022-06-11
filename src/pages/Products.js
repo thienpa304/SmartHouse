@@ -1,17 +1,14 @@
-import { useFormik } from 'formik';
-import { useState } from 'react';
 // material
-import { Container, Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material'
+import { useFormik } from 'formik'
+import { useState } from 'react'
 // components
-import Page from '../components/Page';
+import Page from '../components/Page'
 import {
-  ProductSort,
-  ProductList,
-  ProductCartWidget,
-  ProductFilterSidebar
-} from '../sections/@dashboard/products';
-//
-import PRODUCTS from '../_mocks_/products';
+  ProductFilterSidebar, ProductList, ProductSort
+} from '../sections/@dashboard/products'
+// mocks
+import PRODUCTS from '../_mocks_/products'
 
 // ----------------------------------------------------------------------
 
@@ -47,10 +44,10 @@ export default function EcommerceShop() {
   };
 
   return (
-    <Page title="Dashboard: Products | Minimal-UI">
+    <Page title="Dashboard: Devices | Minimal-UI">
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
+          Devices
         </Typography>
 
         <Stack
@@ -73,7 +70,7 @@ export default function EcommerceShop() {
         </Stack>
 
         <ProductList products={PRODUCTS} />
-        <ProductCartWidget />
+        {/* <ProductCartWidget /> */}
       </Container>
     </Page>
   );

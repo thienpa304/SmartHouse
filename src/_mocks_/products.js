@@ -7,11 +7,12 @@ import { mockImgProduct } from '../utils/mockImages';
 
 const PRODUCT_NAME = [
   'Smart Lighting',
-  'Smart Locks and Entry',
-  'Smart Security Cameras and Systems',
-  'Smart Plugs and Outlets',
-  'New Smart Devices',
-  'Smart Home Entertainment', 
+  'Smart Door',
+  'Mini pump',
+  'Gas sensor',
+  'Buzzer',
+  'Moiseture', 
+  'Temperature and Humidity'
 ];
 const PRODUCT_COLOR = [
   '#00AB55',
@@ -26,7 +27,7 @@ const PRODUCT_COLOR = [
 
 // ----------------------------------------------------------------------
 
-const products = [...Array(6)].map((_, index) => {
+const products = [...Array(7)].map((_, index) => {
   const setIndex = index + 1;
 
   return {

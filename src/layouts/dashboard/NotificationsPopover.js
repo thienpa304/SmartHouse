@@ -1,81 +1,69 @@
-import { faker } from '@faker-js/faker';
-import PropTypes from 'prop-types';
-import { noCase } from 'change-case';
-import { useRef, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { set, sub, formatDistanceToNow } from 'date-fns';
-// material
-import { alpha } from '@mui/material/styles';
 import {
-  Box,
-  List,
-  Badge,
-  Button,
-  Avatar,
-  Tooltip,
-  Divider,
-  IconButton,
-  Typography,
-  ListItemText,
-  ListSubheader,
-  ListItemAvatar,
-  ListItemButton
-} from '@mui/material';
-// utils
-import { mockImgAvatar } from '../../utils/mockImages';
+  Avatar, Badge, Box, Button, Divider,
+  IconButton, List, ListItemAvatar,
+  ListItemButton, ListItemText,
+  ListSubheader, Tooltip, Typography
+} from '@mui/material'
+// material
+import { alpha } from '@mui/material/styles'
+import { noCase } from 'change-case'
+import { formatDistanceToNow } from 'date-fns'
+import PropTypes from 'prop-types'
+import { useRef, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 // components
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import MenuPopover from '../../components/MenuPopover';
+import Iconify from '../../components/Iconify'
+import MenuPopover from '../../components/MenuPopover'
+import Scrollbar from '../../components/Scrollbar'
 
 // ----------------------------------------------------------------------
 
 const NOTIFICATIONS = [
-  {
-    id: faker.datatype.uuid(),
-    title: 'Your order is placed',
-    description: 'waiting for shipping',
-    avatar: null,
-    type: 'order_placed',
-    createdAt: set(new Date(), { hours: 10, minutes: 30 }),
-    isUnRead: true
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: faker.name.findName(),
-    description: 'answered to your comment on the Minimal',
-    avatar: mockImgAvatar(2),
-    type: 'friend_interactive',
-    createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
-    isUnRead: true
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: 'You have new message',
-    description: '5 unread messages',
-    avatar: null,
-    type: 'chat_message',
-    createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: false
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: 'You have new mail',
-    description: 'sent from Guido Padberg',
-    avatar: null,
-    type: 'mail',
-    createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
-    isUnRead: false
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: 'Delivery processing',
-    description: 'Your order is being shipped',
-    avatar: null,
-    type: 'order_shipped',
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: false
-  }
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'Your order is placed',
+  //   description: 'waiting for shipping',
+  //   avatar: null,
+  //   type: 'order_placed',
+  //   createdAt: set(new Date(), { hours: 10, minutes: 30 }),
+  //   isUnRead: true
+  // },
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: faker.name.findName(),
+  //   description: 'answered to your comment on the Minimal',
+  //   avatar: mockImgAvatar(2),
+  //   type: 'friend_interactive',
+  //   createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
+  //   isUnRead: true
+  // },
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'You have new message',
+  //   description: '5 unread messages',
+  //   avatar: null,
+  //   type: 'chat_message',
+  //   createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
+  //   isUnRead: false
+  // },
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'You have new mail',
+  //   description: 'sent from Guido Padberg',
+  //   avatar: null,
+  //   type: 'mail',
+  //   createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
+  //   isUnRead: false
+  // },
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'Delivery processing',
+  //   description: 'Your order is being shipped',
+  //   avatar: null,
+  //   type: 'order_shipped',
+  //   createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+  //   isUnRead: false
+  // }
 ];
 
 function renderContent(notification) {

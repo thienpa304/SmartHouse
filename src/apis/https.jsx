@@ -18,8 +18,8 @@ class Http {
   setSubUri = subUri => {
     this.subUri = subUri;
   };
-  find = async (params) => {
-    return await this.http.get(`/${this.baseUri||''}`, params);
+  find = async (params, subUri) => {
+    return await this.http.get(`/${this.baseUri||''}/${subUri||''}`, params);
   };
 
    

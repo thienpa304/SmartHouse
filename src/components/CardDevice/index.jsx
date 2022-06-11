@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { alpha, styled } from '@mui/material/styles';
-import { Card, Typography } from '@mui/material';
-import Switch from '@mui/material/Switch';
-import { useTheme, makeStyles } from '@mui/styles';
-import { useNavigate } from 'react-router-dom';
-import Iconify from '../../components/Iconify';
+import { Card, Typography } from '@mui/material'
+import { alpha } from '@mui/material/styles'
+import Switch from '@mui/material/Switch'
+import { makeStyles, useTheme } from '@mui/styles'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import Iconify from '../../components/Iconify'
 
 const useStyles = makeStyles((theme) => ({
   root: (props) => ({

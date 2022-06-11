@@ -8,23 +8,15 @@ import { BaseOptionChart } from '../charts';
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [
-  {
-    name: 'Team A',
-    type: 'column',
-    data: []
-  }
-];
-
 const ChartView = (props) => {
   const theme = useTheme();
-  const { data, title, subheader, color, action } = props;
+  const { data, title, subheader, color, action, unit, type } = props;
 
   const dataChart = [
     {
       data: data.values || [],
-      name: data.name,
-      type: data.type
+      name: title,
+      type: type
     }
   ];
 
@@ -48,7 +40,7 @@ const ChartView = (props) => {
       y: {
         formatter: (y) => {
           if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} ${data.unit || 'NaN'}`;
+            return `${y.toFixed(0)} ${unit}`;
           }
           return y;
         }
@@ -57,18 +49,9 @@ const ChartView = (props) => {
   });
   return (
     <Card>
-      <CardHeader
-        action={action}
-        title={title || 'Temperature'}
-        subheader={subheader || 'Range per  5 second (°C)'}
-      />
+      <CardHeader action={action} title={title} subheader={subheader} />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
-        <ReactApexChart
-          type="line"
-          series={dataChart || CHART_DATA}
-          options={chartOptions}
-          height={364}
-        />
+        <ReactApexChart type="line" series={dataChart} options={chartOptions} height={364} />
       </Box>
     </Card>
   );

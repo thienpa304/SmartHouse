@@ -8,13 +8,15 @@ import Iconify from '../../../components/Iconify';
 
 export default function UserMoreMenu(props) {
 
-  const {onEdit, onDelete} = props;
+  const {onEdit, onDelete, onDeleted, onEdited} = props;
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   
   const handleOnClick = (callback) => event =>{
+    onDeleted()
     setIsOpen(false)
     callback(event)
+     
   }
   return (
     <>
@@ -32,14 +34,14 @@ export default function UserMoreMenu(props) {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }} onClick={handleOnClick(onDelete)}>
+        <MenuItem sx={{ color: 'text.secondary' }} onClick={handleOnClick(onDelete?onDelete:()=>{})}>
           <ListItemIcon>
             <Iconify icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
           <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
         </MenuItem>
 
-        <MenuItem onClick={handleOnClick(onEdit)} sx={{ color: 'text.secondary' }}>
+        <MenuItem onClick={onEdited} sx={{ color: 'text.secondary' }}>
           <ListItemIcon>
             <Iconify icon="eva:edit-fill" width={24} height={24} />
           </ListItemIcon>

@@ -1,5 +1,5 @@
 import Https from './https'; 
-import { fTimeRange } from '../utils/formatTime.js';
+import { fTimeRange } from 'utils/formatTime.js';
 class MesureApi extends Https {
   constructor() {
     super('mesures');
@@ -13,7 +13,7 @@ class MesureApi extends Https {
           result.values.push(Math.round(el.value));
           result.labels.push(fTimeRange(el.updated_at, params.filter));
         });
-        return result;
+        return {values: result.values.reverse(),labels: result.labels.reverse()};
       })
       .then((res) => {
         callback(res);

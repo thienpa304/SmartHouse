@@ -4,6 +4,7 @@ import { configMqtt } from 'constants';
 
 const client = () => mqtt.connect('mqtts://io.adafruit.com', configMqtt);
 client().on('error', (error) => {
+  console.log(configMqtt)
   console.log('MQTT Client Errored');
   console.log(error);
 });

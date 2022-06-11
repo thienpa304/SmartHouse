@@ -12,6 +12,8 @@ import User from './pages/User';
 import NotFound from './pages/Page404';
 import Account from './pages/Account';
 import Schedule from 'containers/Schedule';
+import Order from './pages/Order'
+import Customer from './pages/Customer'
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -23,6 +25,8 @@ export default function Router() {
         { path: 'app/:id', element: <Schedule /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
+        { path: 'order', element: <Order /> },
+        { path: 'customer', element: <Customer /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'account', element: <Account /> }

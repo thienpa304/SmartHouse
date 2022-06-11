@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
+import { Box, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material'
 // material
-import { visuallyHidden } from '@mui/utils';
-import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
+import { visuallyHidden } from '@mui/utils'
+import PropTypes from 'prop-types'
 
 // ----------------------------------------------------------------------
 

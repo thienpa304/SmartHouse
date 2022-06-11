@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Avatar, Box, Drawer, Link, Typography } from '@mui/material'
 // material
-import { styled } from '@mui/material/styles';
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
-// mocks_
-import account from '../../_mocks_/account';
-// hooks
-import useResponsive from '../../hooks/useResponsive';
+import { styled } from '@mui/material/styles'
+import PropTypes from 'prop-types'
+import { useEffect } from 'react'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 // components
-import Logo from '../../components/Logo';
-import Scrollbar from '../../components/Scrollbar';
-import NavSection from '../../components/NavSection';
+import Logo from '../../components/Logo'
+import NavSection from '../../components/NavSection'
+import Scrollbar from '../../components/Scrollbar'
+// hooks
+import useResponsive from '../../hooks/useResponsive'
+// mocks_
+import account from '../../_mocks_/account'
 //
-import sidebarConfig from './SidebarConfig';
+import sidebarConfig from './SidebarConfig'
 
 // ----------------------------------------------------------------------
 

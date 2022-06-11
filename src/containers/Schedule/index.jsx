@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import {
-  Container,
-  Stack,
-  Typography,
-  Button,
-  TableContainer,
-  Table,
-  TableRow,
-  TableCell,
-  TableBody,
-  Card,
-  Switch,
-  Box
-} from '@mui/material';
+  Box, Button, Card, Container,
+  Stack, Switch, Table, TableBody, TableCell, TableContainer, TableRow, Typography
+} from '@mui/material'
+import ScheduleApi from 'apis/ScheduleApi'
+import DialogSchedule from 'components/DialogSchedule'
+import Iconify from 'components/Iconify'
+import Label from 'components/Label'
+import Page from 'components/Page'
+import Scrollbar from 'components/Scrollbar'
+import SearchNotFound from 'components/SearchNotFound'
+import { DEVICES, TABLE_HEAD_SCHEDULES } from 'constants'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { UserListHead, UserMoreMenu } from 'sections/@dashboard/user'
+import { formatkey } from 'utils'
 
-import Page from 'components/Page';
-import Iconify from 'components/Iconify';
-import Scrollbar from 'components/Scrollbar';
-import { UserListHead, UserMoreMenu } from 'sections/@dashboard/user';
-import Label from 'components/Label';
-import DialogSchedule from 'components/DialogSchedule';
 
-import SearchNotFound from 'components/SearchNotFound';
 
-import { TABLE_HEAD_SCHEDULES, NAME_DEVICES, keyId } from 'constants';
-
-import ScheduleApi from 'apis/ScheduleApi';
 
 const Schedule = (props) => {
   const location = useLocation();
@@ -38,9 +28,9 @@ const Schedule = (props) => {
   const id = location.pathname.split('/').pop();
 
   useEffect(() => {
-    Object.keys(keyId).forEach((key) => {
-      const check = keyId[key] === id.split('_').join('/');
-      if (check) setDevice(NAME_DEVICES[key]);
+    DEVICES.forEach(({ key, name }) => {
+      const check = formatkey(key) === id.split('_').join('/');
+      if (check) setDevice(name);
     });
 
     ScheduleApi.getByKey(id).then((res) => {
