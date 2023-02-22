@@ -63,7 +63,7 @@ const CardDevice = (props) => {
         <Switch checked={checked} onChange={onChange} color="warning" />
       </Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        {title || 'Light'}
+        {title || 'Lightt'}
       </Typography>
     </Card>
   );
