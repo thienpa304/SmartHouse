@@ -42,10 +42,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-            node-version: 14
+            node-version: 16
             check-latest: true
-            cache: "npm"
-            cache-dependency-path: ${{github.workspace}}/functions/package-lock.json
+           
+           
 
       - name: npm install, build, and test
         run: |
