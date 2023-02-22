@@ -45,7 +45,7 @@ jobs:
             node-version: 16
             check-latest: true
             cache: "npm"
-            cache-dependency-path: "${ GITHUB_WORKSPACE }/functions/package-lock.json"
+            cache-dependency-path: ${{github.workspace}}/functions/package-lock.json
 
       - name: npm install, build, and test
         run: |
