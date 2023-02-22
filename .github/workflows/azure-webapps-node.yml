@@ -35,16 +35,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-#       - uses: azure/login@v1
-#         with:
-#           creds: ${{ secrets.AZURE_CREDENTIALS }}
-       
-
-      - uses: actions/setup-node@v3
+      - uses: azure/login@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-#           cache-dependency-path: '**/package-lock.json'
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+       
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+            node-version: ${{ env.NODE_VERSION }}
+            cache: 'npm'
+            cache-dependency-path: '**/package-lock.json'
 
       - name: npm install, build, and test
         run: |
