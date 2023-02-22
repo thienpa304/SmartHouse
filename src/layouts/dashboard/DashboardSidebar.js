@@ -1,19 +1,19 @@
-import { Avatar, Box, Drawer, Link, Typography } from '@mui/material'
+import { Avatar, Box, Drawer, Link, Typography } from '@mui/material';
 // material
-import { styled } from '@mui/material/styles'
-import PropTypes from 'prop-types'
-import { useEffect } from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 // components
-import Logo from '../../components/Logo'
-import NavSection from '../../components/NavSection'
-import Scrollbar from '../../components/Scrollbar'
+import Logo from '../../components/Logo';
+import NavSection from '../../components/NavSection';
+import Scrollbar from '../../components/Scrollbar';
 // hooks
-import useResponsive from '../../hooks/useResponsive'
+import useResponsive from '../../hooks/useResponsive';
 // mocks_
-import account from '../../_mocks_/account'
+import account from '../../_mocks_/account';
 //
-import sidebarConfig from './SidebarConfig'
+import sidebarConfig from './SidebarConfig';
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +50,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     if (isOpenSidebar) {
       onCloseSidebar();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const renderContent = (
@@ -83,7 +82,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <NavSection navConfig={sidebarConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
-{/* 
+      {/* 
       <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
         <Stack
           alignItems="center"
