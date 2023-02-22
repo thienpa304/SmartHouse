@@ -4,7 +4,7 @@ export const URL_API_ADAFRUIT = 'https://io.adafruit.com/api/v2/';
 
 export const configMqtt = {
   username: 'hoductri',
-  password: 'aio_gvwK58mmBdvEAdI7HMqu5zZhzSlv',
+  password: 'aio_faXm32joXt8Q31fhg1t1Mx8eBwe0',
   port: '443'
 };
 export const feeds = {

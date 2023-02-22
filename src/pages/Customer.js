@@ -79,12 +79,10 @@ export default function Customer() {
   const handleEditOrder = (ID) => (event) => {
     const orderUpdate = listOrders.filter((item) => item.ID === ID);
     setOrderEdit(orderUpdate[0]);
-
-    console.log(orderUpdate);
     setOpenModal(true);
   };
   const handleDeleteOrder = (id) => {
-    setListOrders([...listOrders.filter((item) => item.id !== id)]);
+    setListOrders([...listOrders.filter((item) => item.ID !== id)]);
     CustomerApi.deleteById(id);
   };
   const handleChangePage = (event, newPage) => {
@@ -137,7 +135,7 @@ export default function Customer() {
             variant="contained"
             onClick={() => {
               setOpenModal(true);
-              setOrderEdit(null);
+              setOrderEdit({});
             }}
             startIcon={<Iconify icon="eva:plus-fill" />}
           >

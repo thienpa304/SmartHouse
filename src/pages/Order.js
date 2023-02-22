@@ -1,32 +1,26 @@
-import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
-import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // material
 import {
-  Card,
-  Table,
-  Stack,
-  Avatar,
   Button,
-  Checkbox,
-  TableRow,
+  Card,
+  Container,
+  Stack,
+  Table,
   TableBody,
   TableCell,
-  Container,
-  Typography,
   TableContainer,
-  TablePagination
+  TablePagination,
+  TableRow,
+  Typography
 } from '@mui/material';
 // components
-import Page from '../components/Page'; 
-import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
- 
-import { UserListHead, UserMoreMenu } from '../sections/@dashboard/user';
+import Page from '../components/Page';
+import Scrollbar from '../components/Scrollbar';
+
 import ModalOrder from 'components/ModalOrder';
- 
+import { UserListHead, UserMoreMenu } from '../sections/@dashboard/user';
+
 import OrderApi from 'apis/OrderApi';
 // ----------------------------------------------------------------------
 
@@ -48,13 +42,11 @@ const STATUS_ORDER = {
 
 // ----------------------------------------------------------------------
 
- 
-
 export default function User() {
-  const [page, setPage] = useState(0); 
+  const [page, setPage] = useState(0);
   const [orderEdit, setOrderEdit] = useState({});
   const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name'); 
+  const [orderBy, setOrderBy] = useState('name');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [listOrders, setListOrders] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -66,34 +58,32 @@ export default function User() {
 
   const handleCreateOrder = (order) => {
     setOpenModal(false);
-    let orderSave = {}
-    if(order.ID)
-    {
-      orderSave = {...order}
-      setListOrders([...listOrders.map(item => {
-        if( item.ID === order.ID ) return orderSave
-        else return item
-      })]);
-    }
-    else {
-      orderSave = { ...order, status: 0}
+    let orderSave = {};
+    if (order.ID) {
+      orderSave = { ...order };
+      setListOrders([
+        ...listOrders.map((item) => {
+          if (item.ID === order.ID) return orderSave;
+          else return item;
+        })
+      ]);
+    } else {
+      orderSave = { ...order, status: 0 };
       setListOrders([...listOrders, orderSave]);
     }
-    
-    OrderApi.create(orderSave)
+
+    OrderApi.create(orderSave);
   };
-  const handleEditOrder = ID => event => {
-    
-    const orderUpdate = listOrders.filter( item => item.ID === ID)
-    setOrderEdit(orderUpdate[0])
-  
-    console.log(orderUpdate)
+  const handleEditOrder = (ID) => (event) => {
+    const orderUpdate = listOrders.filter((item) => item.ID === ID);
+    setOrderEdit(orderUpdate[0]);
+
     setOpenModal(true);
-  }
+  };
   const handleDeleteOrder = (id) => {
-    setListOrders([...listOrders.filter(item => item.id !== id)]);
-    OrderApi.deleteById(id)
-  }
+    setListOrders([...listOrders.filter((item) => item.ID !== id)]);
+    OrderApi.deleteById(id);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -112,7 +102,10 @@ export default function User() {
           </Typography>
           <Button
             variant="contained"
-            onClick={() => {setOpenModal(true); setOrderEdit(null)}}
+            onClick={() => {
+              setOpenModal(true);
+              setOrderEdit({});
+            }}
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
             Tạo đơn hàng
@@ -123,7 +116,7 @@ export default function User() {
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
-                <UserListHead 
+                <UserListHead
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
                   rowCount={listOrders.length}
@@ -159,11 +152,10 @@ export default function User() {
                           {cash.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                         </TableCell>
                         <TableCell align="left">{STATUS_ORDER[status]}</TableCell>
-
                         <TableCell align="right">
                           <UserMoreMenu
-                            onDeleted = {() => handleDeleteOrder(ID)}
-                            onEdited = {handleEditOrder(ID)}
+                            onDeleted={() => handleDeleteOrder(ID)}
+                            onEdited={handleEditOrder(ID)}
                           />
                         </TableCell>
                       </TableRow>
@@ -185,10 +177,10 @@ export default function User() {
           />
         </Card>
         <ModalOrder
-          defaultValue = {orderEdit}
+          defaultValue={orderEdit}
           open={openModal}
-          createOrder = {handleCreateOrder}
-          setOpen= {(value) => setOpenModal(value)}
+          createOrder={handleCreateOrder}
+          setOpen={(value) => setOpenModal(value)}
         />
       </Container>
     </Page>

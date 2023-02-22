@@ -1,5 +1,4 @@
-import Https from './https'; 
-import { fTimeRange } from 'utils/formatTime.js';
+import Https from './https';
 class OrderApi extends Https {
   constructor() {
     super('order');
