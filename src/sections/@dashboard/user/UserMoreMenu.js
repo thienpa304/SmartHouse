@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 // material
-import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
+import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material'
 // component
-import Iconify from '../../../components/Iconify';
+import Iconify from '../../../components/Iconify'
 
 // ----------------------------------------------------------------------
 

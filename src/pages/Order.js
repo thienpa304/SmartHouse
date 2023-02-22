@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 // material
 import {
   Button,
@@ -12,16 +12,16 @@ import {
   TablePagination,
   TableRow,
   Typography
-} from '@mui/material';
+} from '@mui/material'
 // components
-import Iconify from '../components/Iconify';
-import Page from '../components/Page';
-import Scrollbar from '../components/Scrollbar';
+import Iconify from '../components/Iconify'
+import Page from '../components/Page'
+import Scrollbar from '../components/Scrollbar'
 
-import ModalOrder from 'components/ModalOrder';
-import { UserListHead, UserMoreMenu } from '../sections/@dashboard/user';
+import ModalOrder from 'components/ModalOrder'
+import { UserListHead, UserMoreMenu } from '../sections/@dashboard/user'
 
-import OrderApi from 'apis/OrderApi';
+import OrderApi from 'apis/OrderApi'
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [

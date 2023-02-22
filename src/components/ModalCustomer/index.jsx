@@ -4,16 +4,14 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Input,
   Stack,
   TextField
 } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import React, { useEffect, useState } from 'react';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import * as Yup from 'yup';
 export default function ModalCustomer(props) {
   const { open, setOpen, createOrder, defaultValue } = props;
@@ -36,7 +34,7 @@ export default function ModalCustomer(props) {
       name: '',
       email: '',
       phone: '',
-      sex: 0, 
+      sex: 0,
       ...defaultValue
     },
     validationSchema: RegisterSchema,
