@@ -35,9 +35,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+#       - uses: azure/login@v1
+#         with:
+#           creds: ${{ secrets.AZURE_CREDENTIALS }}
        
 
       - uses: actions/setup-node@v1
